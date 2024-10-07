@@ -1,0 +1,97 @@
+sim card activation
+
+Steps for Deployment on Heroku:
+
+1. Set Up Your Project Locally
+If you're using FastAPI or Flask, make sure your application is set up properly with a requirements.txt file for the Python dependencies.
+
+Example Structure:
+graphql
+Copy code
+my-sim-activation-app/
+│
+├── app.py                # Your main FastAPI or Flask application
+├── requirements.txt       # Python dependencies
+├── Procfile               # Heroku process file to run the application
+├── runtime.txt            # Specify Python version (optional)
+├── .gitignore             # Ignoring unnecessary files
+requirements.txt Example:
+txt
+Copy code
+fastapi==0.78.0
+uvicorn==0.15.0
+sqlalchemy==1.4.35
+databases==0.5.5
+mysqlclient==2.1.0  # if using MySQL, adjust if using other DB
+
+2. Create a Procfile
+Heroku uses a Procfile to tell the platform how to run your application.
+
+In the root of your project, create a Procfile with the following content for FastAPI:
+
+txt
+Copy code
+web: uvicorn app:app --host=0.0.0.0 --port=${PORT}
+If you're using Flask, the Procfile should be:
+txt
+Copy code
+web: python app.py
+
+3. Set Up Git in Your Project
+If you haven't already initialized a git repository in your project folder, run the following commands:
+
+bash
+Copy code
+git init
+git add .
+git commit -m "Initial commit"
+4. Log In to Heroku via CLI
+Open your terminal and log in to Heroku:
+
+bash
+Copy code
+heroku login
+This will open a browser window asking you to log into your Heroku account.
+
+5. Create a New Heroku App
+In the terminal, run the following command to create a new Heroku app:
+
+bash
+Copy code
+heroku create my-sim-activation-app
+Replace my-sim-activation-app with the name of your app. Heroku will automatically generate a unique name if you don’t provide one.
+
+6. Push Your Code to Heroku
+Deploy your code by pushing it to the Heroku remote repository:
+
+bash
+Copy code
+git push heroku master
+Heroku will now start building and deploying your application.
+
+7. Provision a Database (Optional)
+If you need a database (e.g., PostgreSQL on Heroku), run the following:
+
+bash
+Copy code
+heroku addons:create heroku-postgresql:hobby-dev
+This will create a PostgreSQL database and link it to your Heroku app.
+
+8. Configure Environment Variables
+If your app relies on environment variables (e.g., for database connection strings), you can set them on Heroku:
+
+bash
+Copy code
+heroku config:set DATABASE_URL=your_database_url_here
+
+9. Open Your Application
+Once the deployment is complete, you can open your application in the browser:
+
+bash
+Copy code
+heroku open
+Heroku will launch the deployed application, and you’ll receive a public URL like:
+
+arduino
+Copy code
+https://my-sim-activation-app.herokuapp.com
